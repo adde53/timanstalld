@@ -98,7 +98,7 @@ export default function PensionFormaner() {
                     </div>
                   </div>
                 </section>
-                <FAQSchema faqs={faqs} />
+                <FAQSchema items={faqs} />
               </Layout>
             );
           }
