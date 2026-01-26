@@ -71,13 +71,19 @@ const categories = [
 ];
 
 const popularQuestions = [
-  { q: "OB-ersättning för timanställda – så funkar det", href: "/lon-ersattning" },
-  { q: "Semesterersättning timanställd – procent & exempel", href: "/lon-ersattning" },
-  { q: "Får timanställda lön på röda dagar?", href: "/lon-ersattning/" },
-  { q: "Sjuklön timanställd första dagen", href: "/sjukdom-franvaro" },
+  { q: "OB-ersättning för timanställda – så funkar det", href: "/lon-ersattning/ob-ersattning-timanstalld" },
+  { q: "Semesterersättning timanställd – procent & exempel", href: "/lon-ersattning/semesterersattning-timanstalld" },
+  { q: "Får timanställda lön på röda dagar?", href: "/lon-ersattning/roda-dagar-lon" },
+  { q: "Sjuklön timanställd första dagen", href: "/sjuklon-forsta-dagen" },
+  { q: "Karensdag för timanställda", href: "/sjukdom-franvaro/karensdag-timanstalld" },
+  { q: "Uppsägningstid timanställning", href: "/kontrakt-rattigheter/uppsagningstid-timanstallning" },
+  { q: "Vad är timanställning?", href: "/kontrakt-rattigheter/vad-ar-timanstallning" },
+  { q: "När betalas semester ut?", href: "/semester/nar-betalas-semester" },
   { q: "Kalkyl: semesterersättning", href: "/semester" },
   { q: "Kalkyl: skatt & nettolön", href: "/skatt-utbetalning" },
   { q: "Kalkyl: tjänstepension", href: "/pension-formaner" },
+  { q: "Arbetsmiljö och säkerhet", href: "/arbetsmiljo-sakerhet" },
+  { q: "Schemaläggning och planering", href: "/schemalagning-planering" },
 ];
 
 export default function Index() {
@@ -154,7 +160,7 @@ export default function Index() {
           {/* Search */}
           <div id="sok" className="mt-8 max-w-xl mx-auto animate-fade-in">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
               <Input
                 type="search"
                 placeholder="Sök bland alla ämnen och frågor..."
@@ -162,6 +168,53 @@ export default function Index() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-12 h-14 text-base bg-card border-0 shadow-lg"
               />
+              {/* Search Results Dropdown */}
+              {showSearchResults && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-xl z-50 max-h-80 overflow-y-auto">
+                  {filteredCategories.length === 0 && filteredQuestions.length === 0 ? (
+                    <div className="p-4 text-center text-muted-foreground">
+                      Inga resultat hittades för "{searchQuery}"
+                    </div>
+                  ) : (
+                    <div className="p-2">
+                      {filteredCategories.length > 0 && (
+                        <div className="mb-2">
+                          <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase">Kategorier</div>
+                          {filteredCategories.map((category) => (
+                            <Link
+                              key={category.title}
+                              to={category.href}
+                              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-accent/50 transition-colors"
+                              onClick={() => setSearchQuery("")}
+                            >
+                              <category.icon className="h-4 w-4 text-primary" />
+                              <div>
+                                <div className="font-medium text-sm">{category.title}</div>
+                                <div className="text-xs text-muted-foreground line-clamp-1">{category.description}</div>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                      {filteredQuestions.length > 0 && (
+                        <div>
+                          <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase">Frågor</div>
+                          {filteredQuestions.map((item) => (
+                            <Link
+                              key={item.q}
+                              to={item.href}
+                              className="block px-3 py-2 rounded-lg hover:bg-accent/50 transition-colors text-sm"
+                              onClick={() => setSearchQuery("")}
+                            >
+                              {item.q}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Snabbverktyg: direkt under sökfältet */}
@@ -262,61 +315,14 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Search Results */}
-      {showSearchResults && (
-        <section className="bg-secondary/50">
-          <div className="container-page py-6">
-            {filteredCategories.length === 0 && filteredQuestions.length === 0 ? (
-              <div className="text-center py-8">
-                <p className="text-muted-foreground">
-                  Inga resultat hittades för "{searchQuery}"
-                </p>
-              </div>
-            ) : (
-              <>
-                {filteredCategories.length > 0 && (
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold mb-2">Kategorier</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {filteredCategories.map((category) => (
-                        <CategoryCard key={category.title} {...category} />
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {filteredQuestions.length > 0 && (
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">Frågor</h3>
-                    <ul className="space-y-2">
-                      {filteredQuestions.map((item) => (
-                        <li key={item.q}>
-                          <Link
-                            to={item.href}
-                            className="text-primary hover:underline"
-                          >
-                            {item.q}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-        </section>
-      )}
 
-      {/* Only show rest of the page if not searching */}
-      {!showSearchResults && (
-        <>
-          {/* Snabbverktyg: lönekalkylator mm */}
-          <section className="bg-card border-t border-border">
-            <div className="container-page py-6">
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                <Link
-                  to="/skatt-utbetalning"
-                  className="
+      {/* Snabbverktyg: lönekalkylator mm */}
+      <section className="bg-card border-t border-border">
+        <div className="container-page py-6">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link
+              to="/skatt-utbetalning"
+              className="
                     inline-flex items-center justify-center
                     text-sm font-medium
                     px-5 py-3 rounded-full
@@ -483,8 +489,6 @@ export default function Index() {
               </div>
             </div>
           </section>
-        </>
-      )}
     </Layout>
   );
 }
