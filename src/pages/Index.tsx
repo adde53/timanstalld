@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { createQuestionSlug } from "@/components/FAQItem";
 
 const categories = [
   {
@@ -71,20 +72,25 @@ const categories = [
 ];
 
 const popularQuestions = [
-  { q: "OB-ersättning för timanställda – så funkar det", href: "/lon-ersattning/ob-ersattning-timanstalld" },
-  { q: "Semesterersättning timanställd – procent & exempel", href: "/lon-ersattning/semesterersattning-timanstalld" },
-  { q: "Får timanställda lön på röda dagar?", href: "/lon-ersattning/roda-dagar-lon" },
-  { q: "Sjuklön timanställd första dagen", href: "/sjuklon-forsta-dagen" },
-  { q: "Karensdag för timanställda", href: "/sjukdom-franvaro/karensdag-timanstalld" },
-  { q: "Uppsägningstid timanställning", href: "/kontrakt-rattigheter/uppsagningstid-timanstallning" },
-  { q: "Vad är timanställning?", href: "/kontrakt-rattigheter/vad-ar-timanstallning" },
-  { q: "När betalas semester ut?", href: "/semester/nar-betalas-semester" },
+  { q: "Hur fungerar OB-ersättning för timanställda?", href: "/lon-ersattning", question: "Hur fungerar OB-ersättning för timanställda?" },
+  { q: "Hur mycket är semesterersättning i procent för timanställda?", href: "/lon-ersattning", question: "Hur mycket är semesterersättning i procent för timanställda?" },
+  { q: "Får timanställda lön på röda dagar?", href: "/lon-ersattning", question: "Får timanställda lön på röda dagar?" },
+  { q: "Sjuklön dag 1", href: "/sjuklon-forsta-dagen", question: "Sjuklön dag 1" },
+  { q: "När får man lön som timanställd?", href: "/lon-ersattning", question: "När får man lön som timanställd?" },
+  { q: "När ska semesterersättning betalas ut?", href: "/lon-ersattning", question: "När ska semesterersättning betalas ut?" },
+  { q: "Får jag lön som timanställd om jag är sjuk?", href: "/lon-ersattning", question: "Får jag lön som timanställd om jag är sjuk?" },
   { q: "Kalkyl: semesterersättning", href: "/semester" },
   { q: "Kalkyl: skatt & nettolön", href: "/skatt-utbetalning" },
   { q: "Kalkyl: tjänstepension", href: "/pension-formaner" },
-  { q: "Arbetsmiljö och säkerhet", href: "/arbetsmiljo-sakerhet" },
-  { q: "Schemaläggning och planering", href: "/schemalagning-planering" },
 ];
+
+// Helper to build href with optional hash
+const buildQuestionHref = (item: { href: string; question?: string }) => {
+  if (item.question) {
+    return `${item.href}#${createQuestionSlug(item.question)}`;
+  }
+  return item.href;
+};
 
 export default function Index() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -202,7 +208,7 @@ export default function Index() {
                           {filteredQuestions.map((item) => (
                             <Link
                               key={item.q}
-                              to={item.href}
+                              to={buildQuestionHref(item)}
                               className="block px-3 py-2 rounded-lg hover:bg-accent/50 transition-colors text-sm"
                               onClick={() => setSearchQuery("")}
                             >
