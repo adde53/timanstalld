@@ -71,18 +71,88 @@ const categories = [
   },
 ];
 
-const popularQuestions = [
+// Alla sökbara frågor från alla undersidor
+const allSearchableQuestions = [
+  // Lön & ersättning
   { q: "Hur fungerar OB-ersättning för timanställda?", href: "/lon-ersattning", question: "Hur fungerar OB-ersättning för timanställda?" },
   { q: "Hur mycket är semesterersättning i procent för timanställda?", href: "/lon-ersattning", question: "Hur mycket är semesterersättning i procent för timanställda?" },
   { q: "Får timanställda lön på röda dagar?", href: "/lon-ersattning", question: "Får timanställda lön på röda dagar?" },
-  { q: "Sjuklön dag 1", href: "/sjuklon-forsta-dagen", question: "Sjuklön dag 1" },
-  { q: "När får man lön som timanställd?", href: "/lon-ersattning", question: "När får man lön som timanställd?" },
   { q: "När ska semesterersättning betalas ut?", href: "/lon-ersattning", question: "När ska semesterersättning betalas ut?" },
   { q: "Får jag lön som timanställd om jag är sjuk?", href: "/lon-ersattning", question: "Får jag lön som timanställd om jag är sjuk?" },
+  { q: "När får man lön som timanställd?", href: "/lon-ersattning", question: "När får man lön som timanställd?" },
+  
+  // Sjukdom & frånvaro
+  { q: "Vad är karensdag för timanställda?", href: "/sjukdom-franvaro", question: "Vad är karensdag för timanställda?" },
+  { q: "Hur fungerar sjuklön för timanställda första dagen?", href: "/sjukdom-franvaro", question: "Hur fungerar sjuklön för timanställda första dagen?" },
+  { q: "Vilka regler gäller för sjukanmälan som timanställd?", href: "/sjukdom-franvaro", question: "Vilka regler gäller för sjukanmälan som timanställd?" },
+  { q: "Hur räknas karensavdraget för timanställda?", href: "/sjukdom-franvaro", question: "Hur räknas karensavdraget för timanställda?" },
+  { q: "Behöver jag läkarintyg och när?", href: "/sjukdom-franvaro", question: "Behöver jag läkarintyg och när?" },
+  { q: "Vad gäller efter dag 14 (sjukpenning)?", href: "/sjukdom-franvaro", question: "Vad gäller efter dag 14 (sjukpenning)?" },
+  { q: "Får jag sjuklön om jag blir sjuk under ett pass?", href: "/sjukdom-franvaro", question: "Får jag sjuklön om jag blir sjuk under ett pass?" },
+  { q: "Hur påverkar OB-ersättning sjuklönen?", href: "/sjukdom-franvaro", question: "Hur påverkar OB-ersättning sjuklönen?" },
+  { q: "Gäller sjuklön om jag var bokad som vikarie?", href: "/sjukdom-franvaro", question: "Gäller sjuklön om jag var bokad som vikarie?" },
+  { q: "Hur ansöker jag om sjukpenning som timanställd?", href: "/sjukdom-franvaro", question: "Hur ansöker jag om sjukpenning som timanställd?" },
+  { q: "Tips för att undvika fel i sjuklönen", href: "/sjukdom-franvaro", question: "Tips för att undvika fel i sjuklönen" },
+  
+  // Kontrakt & rättigheter
+  { q: "Vilken uppsägningstid har timanställda?", href: "/kontrakt-rattigheter", question: "Vilken uppsägningstid har timanställda?" },
+  { q: "Kan man tacka nej till pass som timanställd?", href: "/kontrakt-rattigheter", question: "Kan man tacka nej till pass som timanställd?" },
+  { q: "Hur många timmar får timanställda jobba?", href: "/kontrakt-rattigheter", question: "Hur många timmar får timanställda jobba?" },
+  { q: "Har timanställda rätt till schema i förväg?", href: "/kontrakt-rattigheter", question: "Har timanställda rätt till schema i förväg?" },
+  
+  // Semester
+  { q: "Hur räknas semesterersättning ut för timanställda?", href: "/semester", question: "Hur räknas semesterersättning ut för timanställda?" },
+  { q: "Hur fungerar semester inom Handels för timanställda?", href: "/semester", question: "Hur fungerar semester inom Handels för timanställda?" },
+  { q: "Hur fungerar semester för timanställda utan fasta timmar?", href: "/semester", question: "Hur fungerar semester för timanställda utan fasta timmar?" },
+  { q: "Vad är semesterersättning?", href: "/lon-ersattning/semesterersattning-timanstalld", question: "Vad är semesterersättning?" },
+  { q: "Hur räknar man procenten?", href: "/lon-ersattning/semesterersattning-timanstalld", question: "Hur räknar man procenten?" },
+  { q: "När betalas semesterersättning ut?", href: "/lon-ersattning/semesterersattning-timanstalld", question: "När betalas semesterersättning ut?" },
+  { q: "Gäller olika procentsats i olika branscher?", href: "/lon-ersattning/semesterersattning-timanstalld", question: "Gäller olika procentsats i olika branscher?" },
+  
+  // Skatt & utbetalning
+  { q: "Hur fungerar preliminär skatt för timanställda?", href: "/skatt-utbetalning", question: "Hur fungerar preliminär skatt för timanställda?" },
+  { q: "Varför dras så mycket skatt på timlön?", href: "/skatt-utbetalning", question: "Varför dras så mycket skatt på timlön?" },
+  { q: "Vad är engångsskatt för timanställda?", href: "/skatt-utbetalning", question: "Vad är engångsskatt för timanställda?" },
+  
+  // Praktiska situationer
+  { q: "Vilka rättigheter har jag som timanställd om jag blir gravid?", href: "/praktiska-situationer", question: "Vilka rättigheter har jag som timanställd om jag blir gravid?" },
+  { q: "Hur fungerar A-kassa för timanställda?", href: "/praktiska-situationer", question: "Hur fungerar A-kassa för timanställda?" },
+  
+  // Pension & förmåner
+  { q: "Får timanställda tjänstepension?", href: "/pension-formaner", question: "Får timanställda tjänstepension?" },
+  { q: "Vilka försäkringar omfattar timanställda?", href: "/pension-formaner", question: "Vilka försäkringar omfattar timanställda?" },
+  { q: "Hur påverkar varierande inkomst min pension?", href: "/pension-formaner", question: "Hur påverkar varierande inkomst min pension?" },
+  { q: "Har timanställda rätt till andra förmåner (friskvård, rabatter)?", href: "/pension-formaner", question: "Har timanställda rätt till andra förmåner (friskvård, rabatter)?" },
+  { q: "Vad ska jag tänka på om jag har flera arbetsgivare?", href: "/pension-formaner", question: "Vad ska jag tänka på om jag har flera arbetsgivare?" },
+  
+  // Arbetsmiljö & säkerhet
+  { q: "Vilka arbetsmiljörättigheter har timanställda?", href: "/arbetsmiljo-sakerhet", question: "Vilka arbetsmiljörättigheter har timanställda?" },
+  { q: "Hur rapporterar jag en arbetsmiljöincident eller tillbud?", href: "/arbetsmiljo-sakerhet", question: "Hur rapporterar jag en arbetsmiljöincident eller tillbud?" },
+  { q: "Får jag säga nej till farliga arbetsuppgifter?", href: "/arbetsmiljo-sakerhet", question: "Får jag säga nej till farliga arbetsuppgifter?" },
+  { q: "Vilken skyddsutrustning har jag rätt till som timanställd?", href: "/arbetsmiljo-sakerhet", question: "Vilken skyddsutrustning har jag rätt till som timanställd?" },
+  { q: "Hur hanteras hot och våld i arbetet?", href: "/arbetsmiljo-sakerhet", question: "Hur hanteras hot och våld i arbetet?" },
+  
+  // Schemaläggning & planering
+  { q: "Hur kan jag planera min tillgänglighet som timanställd?", href: "/schemalagning-planering", question: "Hur kan jag planera min tillgänglighet som timanställd?" },
+  { q: "Vad gäller vid arbete med kort varsel?", href: "/schemalagning-planering", question: "Vad gäller vid arbete med kort varsel?" },
+  { q: "Hur undviker jag schemakrockar med flera arbetsgivare?", href: "/schemalagning-planering", question: "Hur undviker jag schemakrockar med flera arbetsgivare?" },
+  { q: "Kan jag kräva schema i förväg?", href: "/schemalagning-planering", question: "Kan jag kräva schema i förväg?" },
+  { q: "Hur planerar jag för återhämtning och dygnsvila?", href: "/schemalagning-planering", question: "Hur planerar jag för återhämtning och dygnsvila?" },
+  
+  // Röda dagar
+  { q: "Får timanställda lön på röda dagar?", href: "/lon-ersattning/lon-roda-dagar-timanstalld", question: "Får timanställda lön på röda dagar?" },
+  { q: "Vad gäller vid inställt pass på röd dag?", href: "/lon-ersattning/lon-roda-dagar-timanstalld", question: "Vad gäller vid inställt pass på röd dag?" },
+  { q: "Finns OB på röda dagar?", href: "/lon-ersattning/lon-roda-dagar-timanstalld", question: "Finns OB på röda dagar?" },
+  { q: "Hur ser jag om jag får helglön?", href: "/lon-ersattning/lon-roda-dagar-timanstalld", question: "Hur ser jag om jag får helglön?" },
+  
+  // Kalkylatorer (utan hash-navigering)
   { q: "Kalkyl: semesterersättning", href: "/semester" },
   { q: "Kalkyl: skatt & nettolön", href: "/skatt-utbetalning" },
   { q: "Kalkyl: tjänstepension", href: "/pension-formaner" },
 ];
+
+// Populära frågor för visning på startsidan
+const popularQuestions = allSearchableQuestions.slice(0, 10);
 
 // Helper to build href with optional hash
 const buildQuestionHref = (item: { href: string; question?: string }) => {
@@ -108,8 +178,8 @@ export default function Index() {
       cat.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Filter popular questions
-  const filteredQuestions = popularQuestions.filter((q) =>
+  // Filter all searchable questions
+  const filteredQuestions = allSearchableQuestions.filter((q) =>
     q.q.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
