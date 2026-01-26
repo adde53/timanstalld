@@ -62,6 +62,18 @@ export function Footer() {
           </div>
         </div>
 
+        <div className="mt-8 rounded-md border border-border bg-muted/40 p-4 text-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+          <span className="text-muted-foreground">
+            Kontakt:{" "}
+            <a
+              href="mailto:info@timanstalld.se"
+              className="hover:text-foreground underline-offset-4 hover:underline"
+            >
+              info@timanstalld.se
+            </a>
+          </span>
+        </div>
+
         <div className="mt-12 pt-8 border-t border-border">
           <p className="text-sm text-muted-foreground text-center">
             © {new Date().getFullYear()} timanställd.se. Informationen på denna sida är endast vägledande.
