@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import ArbetsmiljoSakerhet from "./pages/ArbetsmiljoSakerhet";
 import SchemalaggningPlanering from "./pages/SchemalaggningPlanering";
 import PensionFormaner from "./pages/PensionFormaner";
+import GDPRPage from "./pages/Gdpr";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/arbetsmiljo-sakerhet" element={<ArbetsmiljoSakerhet />} />
           <Route path="/schemalaggning-planering" element={<SchemalaggningPlanering />} />
           <Route path="/pension-formaner" element={<PensionFormaner />} />
+          <Route path="/gdpr" element={<GDPRPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
