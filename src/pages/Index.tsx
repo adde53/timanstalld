@@ -393,7 +393,7 @@ export default function Index() {
               Sök bland vanliga frågor
             </a>
             <Link
-              to="/lon-ersattning"
+              to="/skatt-utbetalning"
               className="
                 inline-flex items-center justify-center
                 text-sm font-medium
@@ -406,7 +406,7 @@ export default function Index() {
                 transition-all
               "
             >
-              Räkna ut din ersättning
+              Öppna lönekalkylatorn
             </Link>
           </div>
 

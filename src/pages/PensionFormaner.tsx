@@ -2,10 +2,8 @@ import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/PageHeader";
 import { FAQSection, FAQItemData } from "@/components/FAQItem";
 import { PiggyBank } from "lucide-react";
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
 import { FAQSchema } from "@/components/SEO/FAQSchema";
-import { Link } from "react-router-dom";
+import { PensionKalkylator } from "@/components/PensionKalkylator";
 
 const faqs: FAQItemData[] = [
   {
@@ -36,15 +34,6 @@ const faqs: FAQItemData[] = [
 ];
 
 export default function PensionFormaner() {
-  const [monthlyIncome, setMonthlyIncome] = useState<number>(24000);
-  const [tjanstePercent, setTjanstePercent] = useState<number>(4.5);
-  const [ownSaving, setOwnSaving] = useState<number>(500);
-
-  const yearlyIncome = (monthlyIncome || 0) * 12;
-  const yearlyTjanste = (yearlyIncome * (tjanstePercent || 0)) / 100;
-  const yearlyOwn = (ownSaving || 0) * 12;
-  const totalYearly = yearlyTjanste + yearlyOwn;
-
   return (
     <Layout>
       <PageHeader
@@ -54,7 +43,7 @@ export default function PensionFormaner() {
       />
       <section className="section-padding">
         <div className="container-page">
-          {/* Intro – svar direkt på frågan */}
+          {/* Intro */}
           <div className="bg-card rounded-xl p-6 sm:p-8 border border-border mb-6">
             <p className="text-muted-foreground">
               Som timanställd tjänar du alltid in allmän pension på din beskattade inkomst. Tjänstepension
@@ -77,28 +66,20 @@ export default function PensionFormaner() {
           <div className="bg-card rounded-xl p-6 sm:p-8 border border-border mb-6">
             <h3 className="text-lg font-semibold">Vanliga missförstånd</h3>
             <ul className="mt-2 text-sm text-muted-foreground list-disc pl-5">
-              <li>“Timanställda får aldrig tjänstepension” – stämmer inte om kollektivavtal finns.</li>
-              <li>“Förmåner gäller bara heltidsanställda” – många arbetsgivare ger förmåner även till timanställda.</li>
-              <li>“Varierande timmar ger ingen pension” – all beskattad timlön ger allmän pension.</li>
+              <li>"Timanställda får aldrig tjänstepension" – stämmer inte om kollektivavtal finns.</li>
+              <li>"Förmåner gäller bara heltidsanställda" – många arbetsgivare ger förmåner även till timanställda.</li>
+              <li>"Varierande timmar ger ingen pension" – all beskattad timlön ger allmän pension.</li>
             </ul>
           </div>
 
-          {/* Exempel (med siffror) */}
+          {/* FAQ */}
           <div className="bg-card rounded-xl p-6 sm:p-8 border border-border mb-6">
-            <h3 className="text-lg font-semibold">Exempel</h3>
-            <p className="text-sm text-muted-foreground">
-          Månadsinkomst 24 000 kr och tjänstepension 4,5% → 24 000 × 12 = 288 000 kr/år.
-                        Tjänstepension: 288 000 × 4,5% = 12 960 kr/år. Eget sparande 500 kr/mån = 6 000 kr/år.
-                      </p>
-                    </div>
-
-                    {/* FAQ */}
-                    <div className="bg-card rounded-xl p-6 sm:p-8 border border-border mb-6">
-                      <FAQSection items={faqs} />
-                    </div>
-                  </div>
-                </section>
-                <FAQSchema items={faqs} />
-              </Layout>
-            );
-          }
+            <FAQSection items={faqs} />
+            <PensionKalkylator />
+          </div>
+        </div>
+      </section>
+      <FAQSchema items={faqs} />
+    </Layout>
+  );
+}
