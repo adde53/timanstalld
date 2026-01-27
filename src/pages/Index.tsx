@@ -181,22 +181,22 @@ const allSearchableQuestions = [
   },
   {
     q: "Vad är semesterersättning?",
-    href: "/lon-ersattning/semesterersattning-timanstalld",
+    href: "/semester",
     question: "Vad är semesterersättning?",
   },
   {
     q: "Hur räknar man procenten?",
-    href: "/lon-ersattning/semesterersattning-timanstalld",
+    href: "/semester",
     question: "Hur räknar man procenten?",
   },
   {
     q: "När betalas semesterersättning ut?",
-    href: "/lon-ersattning/semesterersattning-timanstalld",
+    href: "/semester",
     question: "När betalas semesterersättning ut?",
   },
   {
     q: "Gäller olika procentsats i olika branscher?",
-    href: "/lon-ersattning/semesterersattning-timanstalld",
+    href: "/semester",
     question: "Gäller olika procentsats i olika branscher?",
   },
 
@@ -282,45 +282,45 @@ const allSearchableQuestions = [
   // Schemaläggning & planering
   {
     q: "Hur kan jag planera min tillgänglighet som timanställd?",
-    href: "/schemalagning-planering",
+    href: "/schemalaggning-planering",
     question: "Hur kan jag planera min tillgänglighet som timanställd?",
   },
   {
     q: "Vad gäller vid arbete med kort varsel?",
-    href: "/schemalagning-planering",
+    href: "/schemalaggning-planering",
     question: "Vad gäller vid arbete med kort varsel?",
   },
   {
     q: "Hur undviker jag schemakrockar med flera arbetsgivare?",
-    href: "/schemalagning-planering",
+    href: "/schemalaggning-planering",
     question: "Hur undviker jag schemakrockar med flera arbetsgivare?",
   },
-  { q: "Kan jag kräva schema i förväg?", href: "/schemalagning-planering", question: "Kan jag kräva schema i förväg?" },
+  { q: "Kan jag kräva schema i förväg?", href: "/schemalaggning-planering", question: "Kan jag kräva schema i förväg?" },
   {
     q: "Hur planerar jag för återhämtning och dygnsvila?",
-    href: "/schemalagning-planering",
+    href: "/schemalaggning-planering",
     question: "Hur planerar jag för återhämtning och dygnsvila?",
   },
 
   // Röda dagar
   {
     q: "Får timanställda lön på röda dagar?",
-    href: "/lon-ersattning/lon-roda-dagar-timanstalld",
+    href: "/lon-ersattning",
     question: "Får timanställda lön på röda dagar?",
   },
   {
     q: "Vad gäller vid inställt pass på röd dag?",
-    href: "/lon-ersattning/lon-roda-dagar-timanstalld",
+    href: "/lon-ersattning",
     question: "Vad gäller vid inställt pass på röd dag?",
   },
   {
     q: "Finns OB på röda dagar?",
-    href: "/lon-ersattning/lon-roda-dagar-timanstalld",
+    href: "/lon-ersattning",
     question: "Finns OB på röda dagar?",
   },
   {
     q: "Hur ser jag om jag får helglön?",
-    href: "/lon-ersattning/lon-roda-dagar-timanstalld",
+    href: "/lon-ersattning",
     question: "Hur ser jag om jag får helglön?",
   },
 
@@ -552,13 +552,13 @@ export default function Index() {
               Läs också: Lön & ersättning
             </Link>
             <Link
-              to="/lon-ersattning/ob-ersattning-timanstalld"
+              to="/lon-ersattning"
               className="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded-full bg-card border border-border shadow-sm hover:border-primary hover:text-primary hover:bg-accent/30 transition-all"
             >
               Läs också: OB-ersättning för timanställda
             </Link>
             <Link
-              to="/lon-ersattning/semesterersattning-timanstalld"
+              to="/semester"
               className="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded-full bg-card border border-border shadow-sm hover:border-primary hover:text-primary hover:bg-accent/30 transition-all"
             >
               Läs också: Semesterersättning timanställd
