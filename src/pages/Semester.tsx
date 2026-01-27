@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/PageHeader";
 import { FAQSection, FAQItemData } from "@/components/FAQItem";
 import { Sun } from "lucide-react";
+import { SemesterKalkylator } from "@/components/SemesterKalkylator";
 
 const faqs: FAQItemData[] = [
   {
@@ -33,6 +34,7 @@ export default function Semester() {
         <div className="container-page">
           <div className="bg-card rounded-xl p-6 sm:p-8 border border-border">
             <FAQSection items={faqs} />
+            <SemesterKalkylator />
           </div>
         </div>
       </section>
