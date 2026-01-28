@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { FAQSection, FAQItemData } from "@/components/FAQItem";
 import { Thermometer } from "lucide-react";
 import { Link } from "react-router-dom";
+import { FAQSchema } from "@/components/SEO/FAQSchema";
 
 const faqs: FAQItemData[] = [
   {
@@ -62,34 +63,55 @@ const faqs: FAQItemData[] = [
   },
 ];
 
-// Canonical route for Sjuklön-sidan
-const SJUKLON_FIRST_DAY_PATH = "/sjuklon-forsta-dagen";
-
 export default function SjukdomFranvaro() {
   return (
     <Layout>
       <PageHeader
         title="Sjukdom & frånvaro"
-        description="Karensdag, sjuklön dag 2–14 och sjukanmälan för dig som är timanställd."
+        description="Karensdag, sjuklön, sjukanmälan och sjukpenning för dig som är timanställd."
         icon={Thermometer}
       />
       <section className="section-padding">
         <div className="container-page">
+          {/* Intro */}
+          <div className="bg-card rounded-xl p-6 sm:p-8 border border-border mb-6">
+            <h2 className="text-lg font-semibold mb-2">Sjuklön som timanställd</h2>
+            <p className="text-muted-foreground text-sm">
+              Som timanställd har du rätt till sjuklön om du var schemalagd den dag du blev sjuk. 
+              Dag 1 är karensdag (ingen ersättning), dag 2-14 får du cirka 80% i sjuklön från arbetsgivaren. 
+              Efter dag 14 ansöker du om sjukpenning hos Försäkringskassan.
+            </p>
+          </div>
+
+          {/* FAQ */}
           <div className="bg-card rounded-xl p-6 sm:p-8 border border-border">
             <FAQSection items={faqs} />
-            {/* Internlänk till sidan om sjuklön första dagen */}
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                to={SJUKLON_FIRST_DAY_PATH}
-                className="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded-full bg-card border border-border shadow-sm hover:border-primary hover:text-primary hover:bg-accent/30 transition-all"
-                aria-label="Sjuklön timanställd första dagen"
-              >
-                Läs också: Sjuklön timanställd första dagen
-              </Link>
-            </div>
+          </div>
+
+          {/* Relaterade sidor */}
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              to="/sjuklon-forsta-dagen"
+              className="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded-full bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 transition-all"
+            >
+              Sjuklön första dagen – detaljerad guide
+            </Link>
+            <Link
+              to="/lon-ersattning"
+              className="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded-full bg-card border border-border shadow-sm hover:border-primary hover:text-primary hover:bg-accent/30 transition-all"
+            >
+              Lön & ersättning
+            </Link>
+            <Link
+              to="/kontrakt-rattigheter"
+              className="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded-full bg-card border border-border shadow-sm hover:border-primary hover:text-primary hover:bg-accent/30 transition-all"
+            >
+              Kontrakt & rättigheter
+            </Link>
           </div>
         </div>
       </section>
+      <FAQSchema items={faqs} />
     </Layout>
   );
 }
