@@ -4,14 +4,17 @@ import { Input } from "@/components/ui/input";
 
 export function LoneKalkylator() {
   const [timlon, setTimlon] = useState<number>(150);
-  const [obTillagg, setObTillagg] = useState<number>(20);
-  const [timmar, setTimmar] = useState<number>(160);
+  const [vanligaTimmar, setVanligaTimmar] = useState<number>(140);
+  const [obTimmar, setObTimmar] = useState<number>(20);
+  const [obTillagg, setObTillagg] = useState<number>(50);
   const [skattProcent, setSkattProcent] = useState<number>(30);
   const [jamkningBelopp, setJamkningBelopp] = useState<number>(0);
 
   const formatter = new Intl.NumberFormat("sv-SE", { style: "currency", currency: "SEK", maximumFractionDigits: 0 });
 
-  const brutto = Math.max(0, timmar * (timlon + obTillagg));
+  const vanligLon = vanligaTimmar * timlon;
+  const obLon = obTimmar * (timlon + obTillagg);
+  const brutto = Math.max(0, vanligLon + obLon);
   const prelimSkatt = Math.max(0, brutto * (skattProcent / 100));
   const skattEfterJamkning = Math.max(0, prelimSkatt - (jamkningBelopp || 0));
   const netto = Math.max(0, brutto - skattEfterJamkning);
@@ -37,6 +40,30 @@ export function LoneKalkylator() {
           />
         </div>
         <div>
+          <label className="text-sm text-muted-foreground">Vanliga timmar (utan OB)</label>
+          <Input
+            type="number"
+            inputMode="numeric"
+            value={vanligaTimmar}
+            onChange={(e) => setVanligaTimmar(Number(e.target.value))}
+            className="mt-1"
+            min={0}
+            placeholder="t.ex. 140"
+          />
+        </div>
+        <div>
+          <label className="text-sm text-muted-foreground">OB-timmar</label>
+          <Input
+            type="number"
+            inputMode="numeric"
+            value={obTimmar}
+            onChange={(e) => setObTimmar(Number(e.target.value))}
+            className="mt-1"
+            min={0}
+            placeholder="t.ex. 20"
+          />
+        </div>
+        <div>
           <label className="text-sm text-muted-foreground">OB-tillägg per timme (kr)</label>
           <Input
             type="number"
@@ -45,19 +72,7 @@ export function LoneKalkylator() {
             onChange={(e) => setObTillagg(Number(e.target.value))}
             className="mt-1"
             min={0}
-            placeholder="t.ex. 20"
-          />
-        </div>
-        <div>
-          <label className="text-sm text-muted-foreground">Antal timmar (månad)</label>
-          <Input
-            type="number"
-            inputMode="numeric"
-            value={timmar}
-            onChange={(e) => setTimmar(Number(e.target.value))}
-            className="mt-1"
-            min={0}
-            placeholder="t.ex. 160"
+            placeholder="t.ex. 50"
           />
         </div>
         <div>
