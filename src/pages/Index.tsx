@@ -179,9 +179,9 @@ export default function Index() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="hero-gradient relative overflow-hidden">
+      <section className="hero-gradient relative z-50">
         {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
+        <div className="absolute inset-0 opacity-[0.03] overflow-hidden" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }} />
         
@@ -207,7 +207,7 @@ export default function Index() {
                 />
                 {/* Search Results Dropdown */}
                 {showSearchResults && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-xl z-50 max-h-80 overflow-y-auto">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-xl max-h-80 overflow-y-auto z-10">
                     {filteredCategories.length === 0 && filteredQuestions.length === 0 ? (
                       <div className="p-4 text-center text-muted-foreground">
                         Inga resultat hittades för "{searchQuery}"
@@ -258,22 +258,24 @@ export default function Index() {
             </div>
 
             {/* CTA buttons */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 animate-fade-in">
-              <Link
-                to="/skatt-utbetalning"
-                className="btn-primary gap-2"
-              >
-                <Calculator className="h-4 w-4" />
-                Lönekalkylator
-              </Link>
-              <Link
-                to="/kontrakt-rattigheter"
-                className="inline-flex items-center justify-center text-sm font-medium px-5 py-2.5 rounded-lg bg-primary-foreground/15 text-primary-foreground border border-primary-foreground/20 shadow-sm transition-all hover:bg-primary-foreground/25 gap-2"
-              >
-                <BookOpen className="h-4 w-4" />
-                Dina rättigheter
-              </Link>
-            </div>
+            {!showSearchResults && (
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3 animate-fade-in">
+                <Link
+                  to="/skatt-utbetalning"
+                  className="inline-flex items-center justify-center text-sm font-medium px-5 py-2.5 rounded-lg bg-primary-foreground/15 text-primary-foreground border border-primary-foreground/20 shadow-sm transition-all hover:bg-primary-foreground/25 gap-2"
+                >
+                  <Calculator className="h-4 w-4" />
+                  Lönekalkylator
+                </Link>
+                <Link
+                  to="/kontrakt-rattigheter"
+                  className="inline-flex items-center justify-center text-sm font-medium px-5 py-2.5 rounded-lg bg-primary-foreground/15 text-primary-foreground border border-primary-foreground/20 shadow-sm transition-all hover:bg-primary-foreground/25 gap-2"
+                >
+                  <BookOpen className="h-4 w-4" />
+                  Dina rättigheter
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </section>
