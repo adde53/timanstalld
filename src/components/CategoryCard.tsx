@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, ArrowRight } from "lucide-react";
 
 interface CategoryCardProps {
   title: string;
@@ -19,23 +19,26 @@ export function CategoryCard({
   return (
     <Link
       to={href}
-      className="group block bg-card rounded-xl p-6 card-elevated border border-border"
+      className="group block bg-card rounded-xl p-5 card-elevated border border-border hover:border-primary/30"
     >
       <div className="flex items-start gap-4">
-        <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors">
-          <Icon className="h-6 w-6 text-primary" />
+        <div className="flex-shrink-0 w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors">
+          <Icon className="h-5 w-5 text-primary" />
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+          <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors font-display">
             {title}
           </h3>
           <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
             {description}
           </p>
-          <p className="mt-3 text-xs text-muted-foreground">
-            {questionCount} vanliga frågor
-          </p>
         </div>
+      </div>
+      <div className="mt-4 pt-3 border-t border-border flex items-center justify-between">
+        <p className="text-xs text-muted-foreground">
+          {questionCount} vanliga frågor
+        </p>
+        <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
       </div>
     </Link>
   );
