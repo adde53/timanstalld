@@ -1,6 +1,6 @@
 import { Layout } from "@/components/layout/Layout";
 import { CategoryCard } from "@/components/CategoryCard";
-import { Banknote, Thermometer, FileText, Sun, Receipt, HelpCircle, Search, PiggyBank } from "lucide-react";
+import { Banknote, Thermometer, FileText, Sun, Receipt, HelpCircle, Search, PiggyBank, ShieldCheck, ArrowRight, Calculator, BookOpen } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -164,12 +164,6 @@ const buildQuestionHref = (item: { href: string; question?: string }) => {
 export default function Index() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const relatedLinks = [
-    { q: "Lön & pengar – översikt", href: "/lon-ersattning" },
-    { q: "OB-ersättning – så funkar det", href: "/lon-ersattning" },
-    { q: "Semesterersättning – procent & exempel", href: "/lon-ersattning" },
-  ];
-
   // Filter categories
   const filteredCategories = categories.filter(
     (cat) =>
@@ -185,288 +179,161 @@ export default function Index() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="hero-gradient">
-        <div className="container-page py-16 sm:py-24 text-center">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground animate-slide-up">
-            Allt timanställda behöver veta – enkelt förklarat
-          </h1>
-          <p className="mt-4 text-lg text-primary-foreground/90 max-w-2xl mx-auto animate-slide-up">
-            Lön, OB, semester, sjukdom, skatt och rättigheter för dig som är timanställd i Sverige.
-          </p>
+      <section className="hero-gradient relative overflow-hidden">
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
+        
+        <div className="container-page py-20 sm:py-28 relative">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground animate-slide-up leading-tight">
+              Allt timanställda behöver veta
+            </h1>
+            <p className="mt-5 text-lg sm:text-xl text-primary-foreground/85 max-w-2xl mx-auto animate-slide-up leading-relaxed">
+              Lön, OB, semester, sjukdom, skatt och rättigheter – enkelt förklarat för dig som jobbar timmar.
+            </p>
 
-          {/* CTA buttons */}
-          <div className="mt-6 flex items-center justify-center gap-3 animate-fade-in">
-            <a
-              href="#sok"
-              className="
-                inline-flex items-center justify-center
-                text-sm font-medium
-                px-5 py-3 rounded-full
-                bg-card border border-border
-                shadow-sm
-                hover:border-primary hover:text-primary hover:bg-accent/30
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                active:scale-[0.98]
-                transition-all
-              "
-            >
-              Sök bland vanliga frågor
-            </a>
-            <Link
-              to="/skatt-utbetalning"
-              className="
-                inline-flex items-center justify-center
-                text-sm font-medium
-                px-5 py-3 rounded-full
-                bg-primary text-primary-foreground
-                shadow-sm
-                hover:bg-primary/90
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                active:scale-[0.98]
-                transition-all
-              "
-            >
-              Öppna lönekalkylatorn
-            </Link>
-          </div>
-
-          {/* Search */}
-          <div id="sok" className="mt-8 max-w-xl mx-auto animate-fade-in">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
-              <Input
-                type="search"
-                placeholder="Sök bland alla ämnen och frågor..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 h-14 text-base bg-card border-0 shadow-lg"
-              />
-              {/* Search Results Dropdown */}
-              {showSearchResults && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-xl z-50 max-h-80 overflow-y-auto">
-                  {filteredCategories.length === 0 && filteredQuestions.length === 0 ? (
-                    <div className="p-4 text-center text-muted-foreground">
-                      Inga resultat hittades för "{searchQuery}"
-                    </div>
-                  ) : (
-                    <div className="p-2">
-                      {filteredCategories.length > 0 && (
-                        <div className="mb-2">
-                          <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase">
-                            Kategorier
+            {/* Search */}
+            <div id="sok" className="mt-10 max-w-xl mx-auto animate-fade-in">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
+                <Input
+                  type="search"
+                  placeholder="Sök bland alla frågor..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-12 h-14 text-base bg-card border-0 shadow-lg rounded-xl"
+                />
+                {/* Search Results Dropdown */}
+                {showSearchResults && (
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-xl z-50 max-h-80 overflow-y-auto">
+                    {filteredCategories.length === 0 && filteredQuestions.length === 0 ? (
+                      <div className="p-4 text-center text-muted-foreground">
+                        Inga resultat hittades för "{searchQuery}"
+                      </div>
+                    ) : (
+                      <div className="p-2">
+                        {filteredCategories.length > 0 && (
+                          <div className="mb-2">
+                            <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase">
+                              Kategorier
+                            </div>
+                            {filteredCategories.map((category) => (
+                              <Link
+                                key={category.title}
+                                to={category.href}
+                                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-secondary transition-colors"
+                                onClick={() => setSearchQuery("")}
+                              >
+                                <category.icon className="h-4 w-4 text-primary" />
+                                <div>
+                                  <div className="font-medium text-sm">{category.title}</div>
+                                  <div className="text-xs text-muted-foreground line-clamp-1">{category.description}</div>
+                                </div>
+                              </Link>
+                            ))}
                           </div>
-                          {filteredCategories.map((category) => (
-                            <Link
-                              key={category.title}
-                              to={category.href}
-                              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-accent/50 transition-colors"
-                              onClick={() => setSearchQuery("")}
-                            >
-                              <category.icon className="h-4 w-4 text-primary" />
-                              <div>
-                                <div className="font-medium text-sm">{category.title}</div>
-                                <div className="text-xs text-muted-foreground line-clamp-1">{category.description}</div>
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                      {filteredQuestions.length > 0 && (
-                        <div>
-                          <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase">Frågor</div>
-                          {filteredQuestions.map((item) => (
-                            <Link
-                              key={item.q}
-                              to={buildQuestionHref(item)}
-                              className="block px-3 py-2 rounded-lg hover:bg-accent/50 transition-colors text-sm"
-                              onClick={() => setSearchQuery("")}
-                            >
-                              {item.q}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
+                        )}
+                        {filteredQuestions.length > 0 && (
+                          <div>
+                            <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase">Frågor</div>
+                            {filteredQuestions.map((item) => (
+                              <Link
+                                key={item.q}
+                                to={buildQuestionHref(item)}
+                                className="block px-3 py-2 rounded-lg hover:bg-secondary transition-colors text-sm"
+                                onClick={() => setSearchQuery("")}
+                              >
+                                {item.q}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
 
-            {/* Snabbverktyg: direkt under sökfältet */}
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+            {/* CTA buttons */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 animate-fade-in">
               <Link
                 to="/skatt-utbetalning"
-                className="
-                  inline-flex items-center justify-center
-                  text-sm font-medium
-                  px-5 py-3 rounded-full
-                  bg-primary text-primary-foreground
-                  shadow-sm
-                  hover:bg-primary/90
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                  active:scale-[0.98]
-                  transition-all
-                "
-                aria-label="Öppna lönekalkylatorn (nett﻿olön)"
+                className="btn-primary gap-2"
               >
-                Öppna lönekalkylatorn
+                <Calculator className="h-4 w-4" />
+                Lönekalkylator
               </Link>
               <Link
-                to="/semester"
-                className="
-                  inline-flex items-center justify-center
-                  text-sm font-medium
-                  px-5 py-3 rounded-full
-                  bg-card border border-border
-                  shadow-sm
-                  hover:border-primary hover:text-primary hover:bg-accent/30
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                  active:scale-[0.98]
-                  transition-all
-                "
-                aria-label="Räkna ut semesterersättning"
+                to="/kontrakt-rattigheter"
+                className="inline-flex items-center justify-center text-sm font-medium px-5 py-2.5 rounded-lg bg-primary-foreground/15 text-primary-foreground border border-primary-foreground/20 shadow-sm transition-all hover:bg-primary-foreground/25 gap-2"
               >
-                Räkna ut semesterersättning
-              </Link>
-              <Link
-                to="/pension-formaner"
-                className="
-                  inline-flex items-center justify-center
-                  text-sm font-medium
-                  px-5 py-3 rounded-full
-                  bg-card border border-border
-                  shadow-sm
-                  hover:border-primary hover:text-primary hover:bg-accent/30
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                  active:scale-[0.98]
-                  transition-all
-                "
-                aria-label="Räkna ut tjänstepension"
-              >
-                Räkna ut tjänstepension
+                <BookOpen className="h-4 w-4" />
+                Dina rättigheter
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Tools Section */}
+      <section className="bg-card border-b border-border">
+        <div className="container-page py-6">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <span className="text-sm text-muted-foreground mr-1">Kalkylatorer:</span>
+            <Link to="/skatt-utbetalning" className="chip gap-1.5">
+              <Calculator className="h-3.5 w-3.5" />
+              Nettolön
+            </Link>
+            <Link to="/semester" className="chip gap-1.5">
+              <Sun className="h-3.5 w-3.5" />
+              Semesterersättning
+            </Link>
+            <Link to="/pension-formaner" className="chip gap-1.5">
+              <PiggyBank className="h-3.5 w-3.5" />
+              Tjänstepension
+            </Link>
           </div>
         </div>
       </section>
 
       {/* SEO text section: Vad innebär timanställning? */}
-      <section className="bg-card border-t border-border">
-        <div className="container-page py-8">
+      <section className="bg-secondary/30">
+        <div className="container-page py-10 sm:py-12">
           <h2 className="text-xl sm:text-2xl font-bold text-foreground text-center">Vad innebär timanställning?</h2>
-          <p className="mt-3 max-w-3xl mx-auto text-sm sm:text-base text-muted-foreground leading-relaxed text-center">
+          <p className="mt-4 max-w-3xl mx-auto text-sm sm:text-base text-muted-foreground leading-relaxed text-center">
             Timanställning innebär att du får timlön för bekräftade pass i stället för fast månadslön. Som timanställd
-            lön påverkas din inkomst av hur många timmar du arbetar och om du har OB-ersättning för kväll, helg eller
+            påverkas din inkomst av hur många timmar du arbetar och om du har OB-ersättning för kväll, helg eller
             natt. Du får semesterersättning i procent på din bruttolön, normalt 12%, och sjuklön vid sjukanmälan för
-            pass enligt lag och avtal. Uppsägningstid kan variera beroende på överenskommelse och kollektivavtal. För
-            att få ut rätt lön, se till att stämma av lönespecifikationer, förstå skatteavdrag (preliminär skatt och
-            eventuell jämkning) och kontrollera vilka försäkringar och förmåner som ingår. Här hittar du tydliga svar om
-            lön, OB, semesterersättning, sjuklön, skatt och rättigheter – allt för dig som är timanställd i Sverige.
+            pass enligt lag och avtal.
           </p>
-          {/* Internlänkar: pillar + relaterade */}
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              to="/lon-ersattning"
-              className="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded-full bg-card border border-border shadow-sm hover:border-primary hover:text-primary hover:bg-accent/30 transition-all"
-            >
-              Läs också: Lön & ersättning
+          {/* Internlänkar */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+            <Link to="/lon-ersattning" className="chip">
+              Lön & ersättning
             </Link>
-            <Link
-              to="/lon-ersattning"
-              className="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded-full bg-card border border-border shadow-sm hover:border-primary hover:text-primary hover:bg-accent/30 transition-all"
-            >
-              Läs också: OB-ersättning för timanställda
+            <Link to="/semester" className="chip">
+              Semesterersättning
             </Link>
-            <Link
-              to="/semester"
-              className="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded-full bg-card border border-border shadow-sm hover:border-primary hover:text-primary hover:bg-accent/30 transition-all"
-            >
-              Läs också: Semesterersättning timanställd
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Snabbverktyg: lönekalkylator mm */}
-      <section className="bg-card border-t border-border">
-        <div className="container-page py-6">
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link
-              to="/skatt-utbetalning"
-              className="
-                    inline-flex items-center justify-center
-                    text-sm font-medium
-                    px-5 py-3 rounded-full
-                    bg-primary text-primary-foreground
-                    shadow-sm
-                    hover:bg-primary/90
-                    focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                    active:scale-[0.98]
-                    transition-all
-                  "
-              aria-label="Räkna ut nettolön (skatt)"
-            >
-              Räkna ut nettolön (skatt)
-            </Link>
-            <Link
-              to="/semester"
-              className="
-                    inline-flex items-center justify-center
-                    text-sm font-medium
-                    px-5 py-3 rounded-full
-                    bg-card border border-border
-                    shadow-sm
-                    hover:border-primary hover:text-primary hover:bg-accent/30
-                    focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                    active:scale-[0.98]
-                    transition-all
-                  "
-              aria-label="Räkna ut semesterersättning"
-            >
-              Räkna ut semesterersättning
-            </Link>
-            <Link
-              to="/pension-formaner"
-              className="
-                    inline-flex items-center justify-center
-                    text-sm font-medium
-                    px-5 py-3 rounded-full
-                    bg-card border border-border
-                    shadow-sm
-                    hover:border-primary hover:text-primary hover:bg-accent/30
-                    focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                    active:scale-[0.98]
-                    transition-all
-                  "
-              aria-label="Räkna ut tjänstepension"
-            >
-              Räkna ut tjänstepension
+            <Link to="/sjukdom-franvaro" className="chip">
+              Sjuklön & frånvaro
             </Link>
           </div>
         </div>
       </section>
 
       {/* Popular Questions */}
-      <section className="bg-secondary/50">
-        <div className="container-page py-6">
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <span className="text-sm font-medium text-muted-foreground">Populära frågor:</span>
-            {popularQuestions.map((item) => (
+      <section className="bg-card border-y border-border">
+        <div className="container-page py-8">
+          <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide text-center mb-4">Populära frågor</h3>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {popularQuestions.slice(0, 6).map((item) => (
               <Link
                 key={item.q}
                 to={item.href}
-                className="
-                      inline-flex items-center justify-center
-                      text-sm font-medium
-                      px-4 py-2 rounded-full
-                      bg-card border border-border
-                      shadow-sm
-                      hover:border-primary hover:text-primary hover:bg-accent/30
-                      focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                      active:scale-[0.98]
-                      transition-all
-                    "
-                aria-label={item.q}
+                className="chip"
               >
                 {item.q}
               </Link>
@@ -476,51 +343,23 @@ export default function Index() {
       </section>
 
       {/* Categories */}
-      <section className="section-padding">
+      <section className="section-padding bg-background">
         <div className="container-page">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Välj ett ämne</h2>
             <p className="mt-2 text-muted-foreground">Klicka på en kategori för att se alla frågor och svar</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {categories.map((category) => (
               <CategoryCard key={category.title} {...category} />
             ))}
-          </div>
-
-          <div className="mt-10">
-            <h3 className="text-lg font-semibold text-foreground text-center">
-              Relaterade frågor timanställda ofta googlar
-            </h3>
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
-              {relatedLinks.map((item) => (
-                <Link
-                  key={item.q}
-                  to={item.href}
-                  className="
-                        inline-flex items-center justify-center
-                        text-sm font-medium
-                        px-4 py-2 rounded-full
-                        bg-card border border-border
-                        shadow-sm
-                        hover:border-primary hover:text-primary hover:bg-accent/30
-                        focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                        active:scale-[0.98]
-                        transition-all
-                      "
-                  aria-label={item.q}
-                >
-                  {item.q}
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </section>
 
       {/* Info Section */}
-      <section className="bg-card border-t border-border">
+      <section className="bg-secondary/30 border-t border-border">
         <div className="container-page section-padding">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-foreground">Varför timanställd.se?</h2>
@@ -528,18 +367,18 @@ export default function Index() {
               Som timanställd kan det vara svårt att hitta tydliga svar på frågor om dina rättigheter och skyldigheter.
               Vi har samlat den viktigaste informationen på ett ställe – enkelt och lättförståeligt.
             </p>
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <div className="p-4">
-                <div className="text-3xl font-bold text-primary">50+</div>
-                <div className="mt-1 text-sm text-muted-foreground">Vanliga frågor besvarade</div>
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="bg-card rounded-xl p-6 shadow-sm border border-border">
+                <div className="text-3xl font-bold text-primary font-display">50+</div>
+                <div className="mt-2 text-sm text-muted-foreground">Vanliga frågor besvarade</div>
               </div>
-              <div className="p-4">
-                <div className="text-3xl font-bold text-primary">6</div>
-                <div className="mt-1 text-sm text-muted-foreground">Olika ämnesområden</div>
+              <div className="bg-card rounded-xl p-6 shadow-sm border border-border">
+                <div className="text-3xl font-bold text-primary font-display">7</div>
+                <div className="mt-2 text-sm text-muted-foreground">Olika ämnesområden</div>
               </div>
-              <div className="p-4">
-                <div className="text-3xl font-bold text-primary">100%</div>
-                <div className="mt-1 text-sm text-muted-foreground">Gratis att använda</div>
+              <div className="bg-card rounded-xl p-6 shadow-sm border border-border">
+                <div className="text-3xl font-bold text-primary font-display">100%</div>
+                <div className="mt-2 text-sm text-muted-foreground">Gratis att använda</div>
               </div>
             </div>
           </div>
