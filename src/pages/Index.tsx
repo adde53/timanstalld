@@ -207,7 +207,7 @@ export default function Index() {
                 />
                 {/* Search Results Dropdown */}
                 {showSearchResults && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-xl max-h-80 overflow-y-auto z-10">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-xl max-h-80 overflow-y-auto z-[9999]">
                     {filteredCategories.length === 0 && filteredQuestions.length === 0 ? (
                       <div className="p-4 text-center text-muted-foreground">
                         Inga resultat hittades för "{searchQuery}"
