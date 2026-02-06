@@ -17,7 +17,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/60">
+    <header className="sticky top-0 z-[9999] bg-background/95 backdrop-blur-md border-b border-border/60" style={{ position: 'sticky' }}>
       <nav className="container-page">
         <div className="flex h-14 items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5 group">
